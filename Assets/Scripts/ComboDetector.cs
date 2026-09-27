@@ -26,15 +26,16 @@ public class ComboDetector : MonoBehaviour
     [SerializeField]
     private List<ComboEntry> combos = new List<ComboEntry>
     {
-        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','R','L','R','U'}, scene = "OFFICE", advance = "STREET", duration = 3f},
-        new ComboEntry {comboName = "STREETCOMBO", sequence = new List<char>{'U','U','R','R','R'}, scene = "STREET", advance = "GRASS", duration = 3f},
+        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','R','L','R','U'}, scene = "OFFICE", advance = "STREET", duration = 5f},
+        new ComboEntry {comboName = "STREETCOMBO", sequence = new List<char>{'U','U','R','R','R'}, scene = "STREET", advance = "GRASS", duration = 5f},
         new ComboEntry {comboName = "GRASSCOMBO", sequence = new List<char>{'R','L','R'}, scene = "GRASS", advance = "SKY", duration = 3f},
-        new ComboEntry {comboName = "SKYCOMBO", sequence = new List<char>{'R','R','R','R','R','R'}, scene = "SKY", advance = "DICTOFF", duration = 3f},
-        new ComboEntry {comboName = "DICTOFFCOMBO", sequence = new List<char>{'R', 'R','R','R','R','R'}, scene = "DICTOFF", advance = "SPACE", duration = 3f},
-        new ComboEntry {comboName = "SPACECOMBO", sequence = new List<char>{'R', 'R', 'R','R','R','R'}, scene = "SPACE", advance = "EARTH", duration = 3f},
-        new ComboEntry {comboName = "EARTHCOMBO", sequence = new List<char>{'R','R','R','R','R','R'}, scene = "EARTH", advance = "OFFICE", duration = 3f},
+        new ComboEntry {comboName = "SKYCOMBO", sequence = new List<char>{'R','R','R','R','R','R'}, scene = "SKY", advance = "DICTOFF", duration = 6f},
+        new ComboEntry {comboName = "DICTOFFCOMBO", sequence = new List<char>{'R', 'R','R','R','R','R'}, scene = "DICTOFF", advance = "SPACE", duration = 6f},
+        new ComboEntry {comboName = "SPACECOMBO", sequence = new List<char>{'R', 'R', 'R','R','R','R'}, scene = "SPACE", advance = "EARTH", duration = 6f},
+        new ComboEntry {comboName = "EARTHCOMBO", sequence = new List<char>{'R','R','R','R','R','R'}, scene = "EARTH", advance = "OFFICE", duration = 6f},
     };
 
+    [SerializeField] private VisualController visualController;
     [SerializeField] private int maxBufferLength = 10;
     [SerializeField] private TextMeshProUGUI cstat;
     [SerializeField] private TextMeshProUGUI tstat;
@@ -53,6 +54,7 @@ public class ComboDetector : MonoBehaviour
         canInput = true;
         inputTimeout = combos[0].duration;
         lastInputTime = Time.time;
+        visualController.ShowKey(combos[currCombo].sequence[0]);
         foreach(var c in combos)
         {
             maxBufferLength = Mathf.Max(maxBufferLength, c.sequence.Count);
@@ -73,8 +75,13 @@ public class ComboDetector : MonoBehaviour
             if (inputBuffer.Count < expected.Count && pressedKey.Value == expected[inputBuffer.Count])
             {
                 inputBuffer.Add(pressedKey.Value);
-                lastInputTime = Time.time;
-
+                //lastInputTime = Time.time;
+                
+                int nextIn = inputBuffer.Count;
+                if (nextIn < expected.Count)
+                {
+                    visualController.AdvanceKey(expected[nextIn]);
+                }
                 if (inputBuffer.Count > maxBufferLength)
                 {
                     inputBuffer.RemoveAt(0);
@@ -146,6 +153,7 @@ public class ComboDetector : MonoBehaviour
         currCombo = (currCombo + 1) % combos.Count;
         inputTimeout = combos[currCombo].duration;
         lastInputTime = Time.time;
+        visualController.ShowKey(combos[currCombo].sequence[0]);
         canInput = true;
         Debug.Log($"combo dur: {inputTimeout}");
     }
