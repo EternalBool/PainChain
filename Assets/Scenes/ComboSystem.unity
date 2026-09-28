@@ -2597,37 +2597,37 @@ MonoBehaviour:
     sequence: 4c0052004c0052005500
     scene: OFFICE
     advance: STREET
-    duration: 3
+    duration: 10
   - comboName: STREETCOMBO
     sequence: 55005500520052005200
     scene: STREET
     advance: GRASS
-    duration: 3
+    duration: 10
   - comboName: GRASSCOMBO
-    sequence: 52004c005200
+    sequence: 52004c0052005500440055004c0052004c00
     scene: GRASS
     advance: SKY
-    duration: 3
+    duration: 10
   - comboName: SKYCOMBO
-    sequence: 520052005200520052005200
+    sequence: 440055004400520044004c0044004400
     scene: SKY
     advance: DICTOFF
-    duration: 3
+    duration: 10
   - comboName: DICTOFFCOMBO
-    sequence: 520052005200520052005200
+    sequence: 4400440055005500520052004c004c00
     scene: DICTOFF
     advance: SPACE
-    duration: 3
+    duration: 10
   - comboName: SPACECOMBO
-    sequence: 520052005200520052005200
+    sequence: 5200550052004c0055004c005200440052004c0044004c00
     scene: SPACE
     advance: EARTH
-    duration: 3
+    duration: 10
   - comboName: EARTHCOMBO
-    sequence: 520052005200520052005200
+    sequence: 520044004c005500520044004c005500520044004c005500
     scene: EARTH
     advance: OFFICE
-    duration: 3
+    duration: 10
   visualController: {fileID: 1306145800}
   sceneManager: {fileID: 1306145801}
   maxBufferLength: 10
