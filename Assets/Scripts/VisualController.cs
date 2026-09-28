@@ -1,8 +1,4 @@
-using System;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class VisualController : MonoBehaviour

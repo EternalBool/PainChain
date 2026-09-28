@@ -2,16 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Timeline;
-using System.Text.RegularExpressions;
 using TMPro;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
-using UnityEngine.UI;
-using UnityEditor.ShaderGraph;
 
 public class ComboDetector : MonoBehaviour
 {
