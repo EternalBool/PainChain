@@ -164,8 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147b10e214fb5f64ea205524b343fa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  button: {fileID: 4800750732191391235}
   arrows: {fileID: 3662156512399764319}
   up: {fileID: 7545502527109822978, guid: f1f7de7fc848b63478312b3627cfe956, type: 3}
   down: {fileID: -6080959076439915362, guid: f1f7de7fc848b63478312b3627cfe956, type: 3}
   left: {fileID: -1040945323265454436, guid: f1f7de7fc848b63478312b3627cfe956, type: 3}
   right: {fileID: -4020519933858712753, guid: f1f7de7fc848b63478312b3627cfe956, type: 3}
+  disabled: {fileID: -1796733320071786566, guid: 658b31977fcb35447be3abf382b8d08e, type: 3}
