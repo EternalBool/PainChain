@@ -1,53 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using UnityEngine.UI;
 
-public class SceneManager : MonoBehaviour
+public class SceneCounter : MonoBehaviour
 {
-    [SerializeField] private Transform scenesParent; // the "Scenes" object in your hierarchy
 
-    private readonly List<GameObject> scenes = new List<GameObject>();
-    private int currentIndex = 0;
 
-    void Awake()
+    public void ChangeCurrentScene()
     {
-        // Collect every child of "Scenes" in hierarchy order
-        foreach (Transform child in scenesParent)
-        {
-            scenes.Add(child.gameObject);
-        }
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(currentScene + 1);
+
+        Debug.Log("On to the next scene");
     }
 
-    void Start()
+    public void CanvasVisibility(Canvas canvas, bool isEnabled)
     {
-        ShowScene(0);
+        canvas.enabled = isEnabled;
     }
 
-    // Advance to the next scene, looping back to the first
-    public void NextScene()
-    {
-        ShowScene((currentIndex + 1) % scenes.Count);
-    }
-
-    // Jump to a scene by its GameObject name, e.g. "STREET"
-    public void ShowScene(string sceneName)
-    {
-        for (int i = 0; i < scenes.Count; i++)
-        {
-            if (scenes[i].name == sceneName)
-            {
-                ShowScene(i);
-                return;
-            }
-        }
-        Debug.LogWarning($"No scene named '{sceneName}' under {scenesParent.name}");
-    }
-
-    void ShowScene(int index)
-    {
-        currentIndex = index;
-        for (int i = 0; i < scenes.Count; i++)
-        {
-            scenes[i].SetActive(i == currentIndex);
-        }
-    }
 }
