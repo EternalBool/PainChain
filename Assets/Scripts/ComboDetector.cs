@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ComboDetector : MonoBehaviour
 {
