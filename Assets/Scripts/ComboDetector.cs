@@ -35,6 +35,7 @@ public class ComboDetector : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cstat;
     [SerializeField] private TextMeshProUGUI tstat;
     [SerializeField] private UnityEngine.UI.Image tout;
+    [SerializeField] private float failWait = 3f;
 
     private List<char> inputBuffer = new List<char>();
     private float lastInputTime;
@@ -171,10 +172,18 @@ public class ComboDetector : MonoBehaviour
     }
     void InvalidCombo()
     {
-        canInput = false;
-        comboClear = false;
-        cstat.color = Color.red;
-        tstat.color = Color.red;
+        if ((Time.time - lastInputTime) < (inputTimeout -  failWait))
+        {
+            //Debug.Log($"")
+            StartCoroutine(MissedCombo());
+        }
+        else
+        {
+            canInput = false;
+            comboClear = false;
+            cstat.color = Color.red;
+            tstat.color = Color.red;
+        }
     }
     IEnumerator MissedCombo()
     {
