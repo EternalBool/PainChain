@@ -174,7 +174,7 @@ public class ComboDetector : MonoBehaviour
     {
         if ((Time.time - lastInputTime) < (inputTimeout -  failWait))
         {
-            //Debug.Log($"")
+            Debug.Log($"Time: {Time.time}, LT: {lastInputTime}, iT: {inputTimeout}, wT: {failWait}");
             StartCoroutine(MissedCombo());
         }
         else
