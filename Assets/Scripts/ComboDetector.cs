@@ -20,7 +20,7 @@ public class ComboDetector : MonoBehaviour
     [SerializeField]
     private List<ComboEntry> combos = new List<ComboEntry>
     {
-        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','R','L','R','U'}, scene = "OFFICE", advance = "STREET", duration = 10f},
+        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','R','L','R','U'}, scene = "OFFICE", advance = "STREET", duration = 9f},
         new ComboEntry {comboName = "STREETCOMBO", sequence = new List<char>{'U','U','R','R','R'}, scene = "STREET", advance = "GRASS", duration = 10f},
         new ComboEntry {comboName = "GRASSCOMBO", sequence = new List<char>{'R','L','R','U','D','U','L','R','L'}, scene = "GRASS", advance = "SKY", duration = 10f},
         new ComboEntry {comboName = "SKYCOMBO", sequence = new List<char>{'D','U','D','R','D','L','D','D'}, scene = "SKY", advance = "DICTOFF", duration = 10f},
@@ -191,6 +191,7 @@ public class ComboDetector : MonoBehaviour
         canInput = false;
         cstat.color = Color.red;
         tstat.color = Color.red;
+        MusicManager.Instance.BreakMusic("Chain");
         yield return new WaitForSeconds(3f);
         cstat.color = Color.white;
         tstat.color = Color.white;
@@ -202,6 +203,7 @@ public class ComboDetector : MonoBehaviour
         transition = false;
         visualController.AdvanceKey(combos[currCombo].sequence[0]);
         canInput = true;
+        MusicManager.Instance.PlayMusic("Chain", 0f);
         Debug.Log($"combo dur: {inputTimeout}");
     }
 

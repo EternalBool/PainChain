@@ -22,11 +22,12 @@ public class MainMenu : MonoBehaviour
     }
     private void Start()
     {
-        //MusicManager.Instance.PlayMusic("Link");
+        MusicManager.Instance.PlayMusic("Link", 5f);
     }
     public void LinkUp()
     {
         LevelManager.Instance.LoadScene("PainChain", "CrossFade");
+        MusicManager.Instance.PlayMusic("Chain", 5f);
     }
     private void OpenCred()
     {

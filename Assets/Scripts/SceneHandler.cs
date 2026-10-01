@@ -19,7 +19,7 @@ public class SceneHandler : MonoBehaviour
     void Start()
     {
         ShowScene(0);
-        MusicManager.Instance.PlayMusic("Chain");
+        //MusicManager.Instance.PlayMusic("Chain");
     }
 
     public void NextScene()
