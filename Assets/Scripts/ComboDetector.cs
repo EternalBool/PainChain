@@ -20,13 +20,13 @@ public class ComboDetector : MonoBehaviour
     [SerializeField]
     private List<ComboEntry> combos = new List<ComboEntry>
     {
-        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','R','L','R','U'}, scene = "OFFICE", advance = "STREET", duration = 9f},
-        new ComboEntry {comboName = "STREETCOMBO", sequence = new List<char>{'U','U','R','R','R'}, scene = "STREET", advance = "GRASS", duration = 10f},
-        new ComboEntry {comboName = "GRASSCOMBO", sequence = new List<char>{'R','L','R','U','D','U','L','R','L'}, scene = "GRASS", advance = "SKY", duration = 10f},
-        new ComboEntry {comboName = "SKYCOMBO", sequence = new List<char>{'D','U','D','R','D','L','D','D'}, scene = "SKY", advance = "DICTOFF", duration = 10f},
-        new ComboEntry {comboName = "DICTOFFCOMBO", sequence = new List<char>{'D','D','U','U','R','R','L','L'}, scene = "DICTOFF", advance = "SPACE", duration = 10f},
-        new ComboEntry {comboName = "SPACECOMBO", sequence = new List<char>{'R','U','R','L','U','L','R','D','R','L','D','L'}, scene = "SPACE", advance = "EARTH", duration = 10f},
-        new ComboEntry {comboName = "EARTHCOMBO", sequence = new List<char>{'R','D','L','U','R','D','L','U','R','D','L','U'}, scene = "EARTH", advance = "OFFICE", duration = 10f},
+        new ComboEntry {comboName = "OFFICECOMBO", sequence = new List<char>{'L','D','R','L','R','U','D','R','D','U'}, scene = "OFFICE", advance = "STREET", duration = 10f},
+        new ComboEntry {comboName = "STREETCOMBO", sequence = new List<char>{'D','D','D','D','D','U','U','U','R','R','R'}, scene = "STREET", advance = "GRASS", duration = 10f},
+        new ComboEntry {comboName = "GRASSCOMBO", sequence = new List<char>{'U','D','L','R','U','U','U','U','U'}, scene = "GRASS", advance = "SKY", duration = 10f},
+        new ComboEntry {comboName = "SKYCOMBO", sequence = new List<char>{'D','U','D','U','D','U','R','U','R'}, scene = "SKY", advance = "DICTOFF", duration = 10f},
+        new ComboEntry {comboName = "DICTOFFCOMBO", sequence = new List<char>{'R','R','R','R','R','L','U','R','D','D','D'}, scene = "DICTOFF", advance = "SPACE", duration = 10f},
+        new ComboEntry {comboName = "SPACECOMBO", sequence = new List<char>{'R','D','L','U','R','D','L','U','R','D','L','U'}, scene = "SPACE", advance = "EARTH", duration = 10f},
+        new ComboEntry {comboName = "EARTHCOMBO", sequence = new List<char>{'D','L','R','L','R','U','D','U','L','D','U'}, scene = "EARTH", advance = "OFFICE", duration = 10f},
     };
 
     [SerializeField] private VisualController visualController;

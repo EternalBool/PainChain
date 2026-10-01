@@ -4365,37 +4365,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ComboDetector
   combos:
   - comboName: OFFICECOMBO
-    sequence: 4c0052004c0052005500
+    sequence: 4c00440052004c00520055004400520044005500
     scene: OFFICE
     advance: STREET
-    duration: 9
+    duration: 10
   - comboName: STREETCOMBO
-    sequence: 55005500520052005200
+    sequence: 44004400440044004400550055005500520052005200
     scene: STREET
     advance: GRASS
     duration: 10
   - comboName: GRASSCOMBO
-    sequence: 52004c0052005500440055004c0052004c00
+    sequence: 550044004c00520055005500550055005500
     scene: GRASS
     advance: SKY
     duration: 10
   - comboName: SKYCOMBO
-    sequence: 440055004400520044004c0044004400
+    sequence: 440055004400550044005500520055005200
     scene: SKY
     advance: DICTOFF
     duration: 10
   - comboName: DICTOFFCOMBO
-    sequence: 4400440055005500520052004c004c00
+    sequence: 520052005200520052004c0055005200440044004400
     scene: DICTOFF
     advance: SPACE
     duration: 10
   - comboName: SPACECOMBO
-    sequence: 5200550052004c0055004c005200440052004c0044004c00
+    sequence: 520044004c005500520044004c005500520044004c005500
     scene: SPACE
     advance: EARTH
     duration: 10
   - comboName: EARTHCOMBO
-    sequence: 520044004c005500520044004c005500520044004c005500
+    sequence: 44004c0052004c0052005500440055004c0044005500
     scene: EARTH
     advance: OFFICE
     duration: 10

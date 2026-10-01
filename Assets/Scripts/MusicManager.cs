@@ -20,13 +20,15 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void PlayMusic(string trackName, float fadeDur = 0.5f)
+    public void PlayMusic(string trackName, float fadeDur = 0.5f, float wait = 0f)
     {
-        Debug.Log($"Music Fade Dur: {fadeDur}");
-        StartCoroutine(AnimateMusicCrossFade(musicLibrary.GetClipFromName(trackName), fadeDur));
+        //Debug.Log($"Music Fade Dur: {fadeDur}");
+        StartCoroutine(AnimateMusicCrossFade(musicLibrary.GetClipFromName(trackName), fadeDur, wait));
     }
-    IEnumerator AnimateMusicCrossFade(AudioClip nextTrack, float fadeDur)
+    IEnumerator AnimateMusicCrossFade(AudioClip nextTrack, float fadeDur, float wait)
     {
+        Debug.Log($"Wait for {wait}s");
+        if (wait > 0) yield return new WaitForSeconds(wait);
         float percent = 0;
         while (percent > 1)
         {
