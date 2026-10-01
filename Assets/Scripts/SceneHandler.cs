@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class SceneHandler : MonoBehaviour
 {
-    [SerializeField] private Transform scenesParent; // the "Scenes" object in your hierarchy
+    [SerializeField] private Transform scenesParent;
 
     private readonly List<GameObject> scenes = new List<GameObject>();
     private int currentIndex = 0;
 
     void Awake()
     {
-        // Collect every child of "Scenes" in hierarchy order
         foreach (Transform child in scenesParent)
         {
             scenes.Add(child.gameObject);
@@ -20,15 +19,13 @@ public class SceneManager : MonoBehaviour
     void Start()
     {
         ShowScene(0);
+        MusicManager.Instance.PlayMusic("Chain");
     }
 
-    // Advance to the next scene, looping back to the first
     public void NextScene()
     {
         ShowScene((currentIndex + 1) % scenes.Count);
     }
-
-    // Jump to a scene by its GameObject name, e.g. "STREET"
     public void ShowScene(string sceneName)
     {
         for (int i = 0; i < scenes.Count; i++)

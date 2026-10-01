@@ -30,7 +30,7 @@ public class ComboDetector : MonoBehaviour
     };
 
     [SerializeField] private VisualController visualController;
-    [SerializeField] private SceneManager sceneManager;
+    [SerializeField] private SceneHandler sceneHandler;
     [SerializeField] private int maxBufferLength = 10;
     [SerializeField] private TextMeshProUGUI cstat;
     [SerializeField] private TextMeshProUGUI tstat;
@@ -196,7 +196,7 @@ public class ComboDetector : MonoBehaviour
         tstat.color = Color.white;
         inputBuffer.Clear();
         currCombo = 0;
-        sceneManager.ShowScene(combos[currCombo].scene);
+        sceneHandler.ShowScene(combos[currCombo].scene);
         inputTimeout = combos[currCombo].duration;
         lastInputTime = Time.time;
         transition = false;
@@ -214,14 +214,14 @@ public class ComboDetector : MonoBehaviour
             tstat.color = Color.white;
             inputBuffer.Clear();
             currCombo = (currCombo + 1) % combos.Count;
-            sceneManager.ShowScene(combos[currCombo].scene);
+            sceneHandler.ShowScene(combos[currCombo].scene);
             inputTimeout = combos[currCombo].duration;
             lastInputTime = Time.time;
             transition = false;
             comboClear = false;
             visualController.AdvanceKey(combos[currCombo].sequence[0]);
             canInput = true;
-            //sceneManager.OnComboCompleted();
+            //sceneHandler.OnComboCompleted();
             Debug.Log($"combo dur: {inputTimeout}");
         }
         else
@@ -230,7 +230,7 @@ public class ComboDetector : MonoBehaviour
             tstat.color = Color.white;
             inputBuffer.Clear();
             currCombo = 0;
-            sceneManager.ShowScene(combos[currCombo].scene);
+            sceneHandler.ShowScene(combos[currCombo].scene);
             inputTimeout = combos[currCombo].duration;
             lastInputTime = Time.time;
             transition = false;
