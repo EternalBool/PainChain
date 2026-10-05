@@ -40,6 +40,7 @@ public class ComboDetector : MonoBehaviour
     private List<char> inputBuffer = new List<char>();
     private float lastInputTime;
     private int currCombo = 0;
+    private string currScene = "";
     private bool canInput = false;
     private float inputTimeout = 1.5f;
     private bool comboClear = false;
@@ -53,6 +54,7 @@ public class ComboDetector : MonoBehaviour
         inputTimeout = combos[0].duration;
         lastInputTime = Time.time;
         transition = false;
+        currScene = combos[currCombo].scene;
         visualController.AdvanceKey(combos[currCombo].sequence[0]);
         foreach(var c in combos)
         {
@@ -64,11 +66,11 @@ public class ComboDetector : MonoBehaviour
         if (Keyboard.current == null) return;
         if (!transition && Time.time - lastInputTime > inputTimeout)
         {
-            Debug.Log("End");
+            //Debug.Log("End");
             transition = true;
             if (comboClear)
             {
-                Debug.Log("Chain");
+                //Debug.Log("Chain");
                 Chain("Link");
             }
             else
@@ -193,11 +195,14 @@ public class ComboDetector : MonoBehaviour
         tstat.color = Color.red;
         MusicManager.Instance.BreakMusic("Chain");
         yield return new WaitForSeconds(3f);
+        Chain("Break");
+        /*
         cstat.color = Color.white;
         tstat.color = Color.white;
         inputBuffer.Clear();
         currCombo = 0;
-        sceneHandler.ShowScene(combos[currCombo].scene);
+        currScene = combos[currCombo].scene;
+        sceneHandler.ShowScene(currScene);
         inputTimeout = combos[currCombo].duration;
         lastInputTime = Time.time;
         transition = false;
@@ -205,6 +210,7 @@ public class ComboDetector : MonoBehaviour
         canInput = true;
         MusicManager.Instance.PlayMusic("Chain", 0f);
         Debug.Log($"combo dur: {inputTimeout}");
+        */
     }
 
     void Chain(string act)
@@ -212,34 +218,27 @@ public class ComboDetector : MonoBehaviour
         if (act == "Link")
         {
             Debug.Log("Link");
-            cstat.color = Color.white;
-            tstat.color = Color.white;
-            inputBuffer.Clear();
             currCombo = (currCombo + 1) % combos.Count;
-            sceneHandler.ShowScene(combos[currCombo].scene);
-            inputTimeout = combos[currCombo].duration;
-            lastInputTime = Time.time;
-            transition = false;
-            comboClear = false;
-            visualController.AdvanceKey(combos[currCombo].sequence[0]);
-            canInput = true;
-            //sceneHandler.OnComboCompleted();
-            Debug.Log($"combo dur: {inputTimeout}");
+            currScene = combos[currCombo].advance != combos[currCombo].scene ? combos[currCombo].advance : combos[currCombo].scene;
         }
         else
         {
-            cstat.color = Color.white;
-            tstat.color = Color.white;
-            inputBuffer.Clear();
+            Debug.Log("Break");;
             currCombo = 0;
-            sceneHandler.ShowScene(combos[currCombo].scene);
-            inputTimeout = combos[currCombo].duration;
-            lastInputTime = Time.time;
-            transition = false;
-            visualController.AdvanceKey(combos[currCombo].sequence[0]);
-            canInput = true;
-            Debug.Log($"combo dur: {inputTimeout}");
+            currScene = combos[currCombo].scene;
+            MusicManager.Instance.PlayMusic("Chain", 0f);
         }
+        cstat.color = Color.white;
+        tstat.color = Color.white;
+        inputBuffer.Clear();
+        sceneHandler.ShowScene(currScene);
+        inputTimeout = combos[currCombo].duration;
+        lastInputTime = Time.time;
+        transition = false;
+        comboClear = false;
+        visualController.AdvanceKey(combos[currCombo].sequence[0]);
+        canInput = true;
+        Debug.Log($"combo dur: {inputTimeout}");
     }
 
     void UpdateTimeout()

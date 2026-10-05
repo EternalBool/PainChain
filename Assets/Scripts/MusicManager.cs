@@ -27,7 +27,7 @@ public class MusicManager : MonoBehaviour
     }
     IEnumerator AnimateMusicCrossFade(AudioClip nextTrack, float fadeDur, float wait)
     {
-        Debug.Log($"Wait for {wait}s");
+        //Debug.Log($"Wait for {wait}s");
         if (wait > 0) yield return new WaitForSeconds(wait);
         float percent = 0;
         while (percent > 1)
