@@ -4364,11 +4364,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComboDetector
   combos:
-  - comboName: OFFICECOMBO
-    sequence: 4c00440052004c00520055004400520044005500
+  - comboName: OFFTHMBDWNCOMBO
+    sequence: 4c004400
+    scene: OFFICE
+    advance: OFFICE
+    duration: 2
+  - comboName: OFFEMPSHKNOCOMBO
+    sequence: 52004c005200
+    scene: OFFICE
+    advance: OFFICE
+    duration: 3
+  - comboName: OFFBOSSNODCOMBO
+    sequence: 55004400
+    scene: OFFICE
+    advance: OFFICE
+    duration: 2
+  - comboName: OFFEMPTBLFLIPCOMBO
+    sequence: 520044005500
     scene: OFFICE
     advance: STREET
-    duration: 10
+    duration: 3
   - comboName: STREETCOMBO
     sequence: 44004400440044004400550055005500520052005200
     scene: STREET

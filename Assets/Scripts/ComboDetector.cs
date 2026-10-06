@@ -56,6 +56,7 @@ public class ComboDetector : MonoBehaviour
         transition = false;
         currScene = combos[currCombo].scene;
         visualController.AdvanceKey(combos[currCombo].sequence[0]);
+        Debug.Log($"Combo #{currCombo} - {combos[currCombo].comboName}, Scene {currScene}");
         foreach(var c in combos)
         {
             maxBufferLength = Mathf.Max(maxBufferLength, c.sequence.Count);
@@ -215,19 +216,19 @@ public class ComboDetector : MonoBehaviour
 
     void Chain(string act)
     {
+        Debug.Log($"Current Scene: {currScene}");
         if (act == "Link")
         {
-            Debug.Log("Link");
-            currCombo = (currCombo + 1) % combos.Count;
             currScene = combos[currCombo].advance != combos[currCombo].scene ? combos[currCombo].advance : combos[currCombo].scene;
+            currCombo = (currCombo + 1) % combos.Count;
         }
         else
         {
-            Debug.Log("Break");;
             currCombo = 0;
             currScene = combos[currCombo].scene;
             MusicManager.Instance.PlayMusic("Chain", 0f);
         }
+        Debug.Log($"Combo #{currCombo} - {combos[currCombo].comboName}, Scene {currScene}");
         cstat.color = Color.white;
         tstat.color = Color.white;
         inputBuffer.Clear();

@@ -55,7 +55,7 @@ public class MusicManager : MonoBehaviour
     {
         if (musicSource.clip == currTrack)
         {
-            Debug.Log("Slowing Track");
+            //Debug.Log("Slowing Track");
             float elapsed = 0f;
             float current = musicSource.pitch;
             while (elapsed < fadeDur)
