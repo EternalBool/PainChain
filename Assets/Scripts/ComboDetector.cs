@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class ComboDetector : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class ComboDetector : MonoBehaviour
     private float inputTimeout = 1.5f;
     private bool comboClear = false;
     private bool transition = false;
+    private bool debug = false;
     
 
     void Start()
@@ -107,10 +109,19 @@ public class ComboDetector : MonoBehaviour
             } 
         }
         CheckCombo();
-        if (cstat != null && tstat != null)
+        if (Keyboard.current != null && Keyboard.current.periodKey.wasPressedThisFrame)
+        {
+            debug = !debug;
+        }
+        if (cstat != null && tstat != null && debug)
         {
             cstat.text = $"Combo: [{string.Join(", ", inputBuffer)}] {inputBuffer.Count}";
             tstat.text = $"Target: [{string.Join(", ", combos[currCombo].sequence)}]";
+        }
+        else
+        {
+            cstat.text = "";
+            tstat.text = "";
         }
         UpdateTimeout();
     }
@@ -160,6 +171,7 @@ public class ComboDetector : MonoBehaviour
         comboClear = true;
         cstat.color = Color.green;
         tstat.color = Color.green;
+        SoundManager.Instance.PlaySound2D("Link");
         /*
         yield return new WaitForSeconds(0.5f);
         cstat.color = Color.white;
@@ -194,6 +206,7 @@ public class ComboDetector : MonoBehaviour
         canInput = false;
         cstat.color = Color.red;
         tstat.color = Color.red;
+        SoundManager.Instance.PlaySound2D("Break");
         MusicManager.Instance.BreakMusic("Chain");
         yield return new WaitForSeconds(3f);
         Chain("Break");
