@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 78df5930265657c4c9d11e2178257621
+guid: fccd0c342ff0aa7419f7471e12faef65
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4200348024263247753
-    second: bossthumb_0
-  - first:
-      213: -1975432204250637437
-    second: bossthumb_1
+      213: -5382516188714656222
+    second: tempback_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossthumb_0
+      name: tempback_0
       rect:
         serializedVersion: 2
-        x: 571
-        y: 41
-        width: 181
-        height: 287
+        x: 0
+        y: 0
+        width: 960
+        height: 540
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 77876c0f9bd55b5c0800000000000000
-      internalID: -4200348024263247753
+      spriteID: 22e9fdd4b067d45b0800000000000000
+      internalID: -5382516188714656222
       vertices: []
       indices: 
       edges: []
@@ -141,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f5c851f771793394489ce42936457458
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -149,11 +146,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      bossthumb_0: -4200348024263247753
+      tempback_0: -5382516188714656222
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -6,26 +6,24 @@ public class SceneHandler : MonoBehaviour
     [SerializeField] private Transform scenesParent;
 
     private readonly List<GameObject> scenes = new List<GameObject>();
-    private int currentIndex = 0;
+    private SceneController current;
+    private int currentIndex = -1;
 
     void Awake()
     {
-        foreach (Transform child in scenesParent)
+        foreach (Transform child in transform)
         {
             scenes.Add(child.gameObject);
         }
     }
 
-    void Start()
+    void Start() => ShowScene(0); //MusicManager.Instance.PlayMusic("Chain");
+    public void Advance()
     {
-        ShowScene(0);
-        //MusicManager.Instance.PlayMusic("Chain");
+        if (current != null) current.Advance();
     }
 
-    public void NextScene()
-    {
-        ShowScene((currentIndex + 1) % scenes.Count);
-    }
+    public void NextScene() => ShowScene((currentIndex + 1) % scenes.Count);
     public void ShowScene(string sceneName)
     {
         for (int i = 0; i < scenes.Count; i++)
@@ -41,10 +39,14 @@ public class SceneHandler : MonoBehaviour
 
     void ShowScene(int index)
     {
+        if (index == currentIndex) return;
+        if (current != null) current.Exit();
         currentIndex = index;
         for (int i = 0; i < scenes.Count; i++)
         {
             scenes[i].SetActive(i == currentIndex);
         }
+        scenes[currentIndex].TryGetComponent(out current);
+        if (current != null) current.Enter();
     }
 }
