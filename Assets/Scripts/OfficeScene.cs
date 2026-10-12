@@ -14,7 +14,7 @@ public class OfficeScene : SceneController
         {
             case "boss": boss.SetTrigger(act); break;
             case "emp": emp.SetTrigger(act); break;
-            case "tutti": boss.SetTrigger(act); emp.SetTrigger(act); break;
+            case "tutti": emp.SetTrigger(act); boss.SetTrigger(act); break;
             default: Debug.LogWarning($"Unknown actor '{ent}' in link '{act}'"); break;
         } 
     }
