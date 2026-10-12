@@ -16,6 +16,7 @@ public abstract class SceneController : MonoBehaviour
         public string action;
         public Transform link;
         public Vector3 destination;
+        public float rotation;
         public float duration;
     }
     protected int currIn = -1;
@@ -28,7 +29,7 @@ public abstract class SceneController : MonoBehaviour
             startPos[i] = links[i].transform.localPosition;
         }
     }
-    public virtual void Enter()
+    public virtual void Set()
     {
         for (int i = 0; i < startPos.Length; i++)
         {
@@ -47,7 +48,7 @@ public abstract class SceneController : MonoBehaviour
         }
         currIn = -1;
     }
-    public virtual void Exit() { }
+    //public virtual void Exit() { }
     public virtual void Advance()
     {
         if (sequence == null || sequence.Count == 0) return;
@@ -59,16 +60,22 @@ public abstract class SceneController : MonoBehaviour
         ChainLink(ent, act);
         if (step.link != null) 
         {
-            StartCoroutine(MoveTo(step.link, step.destination, step.duration));
+            StartCoroutine(Motion(step.link, step.destination, step.rotation, step.duration));
         }
     }
 
-    IEnumerator MoveTo(Transform link, Vector3 destination, float duration)
+    IEnumerator Motion(Transform link, Vector3 destination, float rotation, float duration)
     {
         Vector3 start = link.localPosition;
+        Quaternion startRot = link.localRotation;
         for (float e = 0f; e < duration; e+= Time.deltaTime)
         {
             link.localPosition = Vector3.Lerp(start, destination, Mathf.SmoothStep(0f,1f,e/duration));
+            if (rotation != 0f)
+            {
+                float currentAngle = Mathf.Lerp(0f, rotation, e/duration);
+                link.localRotation = startRot * Quaternion.Euler(0f,0f,currentAngle);
+            }
             yield return null;
         }
         link.localPosition = destination;

@@ -249,7 +249,7 @@ public class ComboDetector : MonoBehaviour
         cstat.color = Color.white;
         tstat.color = Color.white;
         inputBuffer.Clear();
-        if (currScene != lastScene) sceneHandler.ShowScene(currScene);
+        if (currScene != lastScene || currCombo == 0) sceneHandler.ShowScene(currScene);
         inputTimeout = combos[currCombo].duration;
         lastInputTime = Time.time;
         transition = false;

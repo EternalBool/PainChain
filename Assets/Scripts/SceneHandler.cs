@@ -40,13 +40,14 @@ public class SceneHandler : MonoBehaviour
     void ShowScene(int index)
     {
         if (index == currentIndex) return;
-        if (current != null) current.Exit();
+        Debug.Log("SHOWWINGNGGGNNGNGNGNG");
+        //if (current != null) current.Exit();
         currentIndex = index;
         for (int i = 0; i < scenes.Count; i++)
         {
             scenes[i].SetActive(i == currentIndex);
         }
         scenes[currentIndex].TryGetComponent(out current);
-        if (current != null) current.Enter();
+        if (current != null) current.Set();
     }
 }
