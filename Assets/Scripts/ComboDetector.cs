@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using Unity.Mathematics;
 
 public class ComboDetector : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class ComboDetector : MonoBehaviour
     private bool canInput = false;
     private float inputTimeout = 1.5f;
     private bool comboClear = false;
+    private bool comboFail = false;
     private bool transition = false;
     private bool debug = true;
     
@@ -72,6 +74,7 @@ public class ComboDetector : MonoBehaviour
         if (!transition && Time.time - lastInputTime > inputTimeout)
         {
             //Debug.Log("End");
+            if (comboFail) return;
             transition = true;
             if (comboClear)
             {
@@ -107,8 +110,8 @@ public class ComboDetector : MonoBehaviour
             else
             {
                 inputBuffer.Add(pressedKey.Value);
-                InvalidCombo();
-                //StartCoroutine(InvalidCombo());
+                //InvalidCombo();
+                StartCoroutine(MissedCombo());
             } 
         }
         CheckCombo();
@@ -172,6 +175,7 @@ public class ComboDetector : MonoBehaviour
     {
         canInput = false;
         comboClear = true;
+        comboFail = false;
         cstat.color = Color.green;
         tstat.color = Color.green;
         SoundManager.Instance.PlaySound2D("Link");
@@ -192,6 +196,7 @@ public class ComboDetector : MonoBehaviour
     {
         if ((Time.time - lastInputTime) < (inputTimeout -  failWait))
         {
+            
             //Debug.Log($"Time: {Time.time}, LT: {lastInputTime}, iT: {inputTimeout}, wT: {failWait}");
             StartCoroutine(MissedCombo());
         }
@@ -207,6 +212,7 @@ public class ComboDetector : MonoBehaviour
     {
         Debug.Log($"Combo Failed: {combos[currCombo].comboName} -> loading '{combos[0].comboName}");
         canInput = false;
+        comboFail = true;
         cstat.color = Color.red;
         tstat.color = Color.red;
         SoundManager.Instance.PlaySound2D("Break");
@@ -254,6 +260,7 @@ public class ComboDetector : MonoBehaviour
         lastInputTime = Time.time;
         transition = false;
         comboClear = false;
+        comboFail = false;
         visualController.AdvanceKey(combos[currCombo].sequence[0]);
         canInput = true;
         //Debug.Log($"combo dur: {inputTimeout}");
