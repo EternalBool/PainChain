@@ -1605,16 +1605,56 @@ MonoBehaviour:
   - {fileID: 1877298684}
   - {fileID: 140657915}
   sequence:
-  - boss_point
-  - boss_thumb
-  - emp_rightshake
-  - emp_leftshake
-  - emp_rightshook
-  - boss_nod
-  - boss_chill
-  - emp_leap
-  - emp_lift
-  - tutti_tableflip
+  - action: boss_point
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: boss_thumb
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: emp_rightshake
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: emp_leftshake
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: emp_rightshook
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: boss_nod
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: boss_chill
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: emp_leap
+    link: {fileID: 140657913}
+    destination: {x: -1.4, y: 0, z: 0}
+    rotation: 0
+    duration: 0.2
+  - action: emp_lift
+    link: {fileID: 0}
+    destination: {x: 0, y: 0, z: 0}
+    rotation: 0
+    duration: 0
+  - action: tutti_tableflip
+    link: {fileID: 669190923}
+    destination: {x: 3.7, y: 0, z: 0}
+    rotation: 360
+    duration: 1
 --- !u!1 &1877298681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1824,7 @@ MonoBehaviour:
     advance: OFFICE
     duration: 3
   - comboName: OFFBOSSNODCOMBO
-    sequence: 55004400
+    sequence: 44005500
     scene: OFFICE
     advance: OFFICE
     duration: 2

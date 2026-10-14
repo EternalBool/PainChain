@@ -21,34 +21,50 @@ public abstract class SceneController : MonoBehaviour
     }
     protected int currIn = -1;
     Vector3[] startPos; 
+    Quaternion[] startRot;
     public virtual void Awake()
     {
         startPos = new Vector3[links.Length];
+        startRot = new Quaternion[links.Length];
         for (int i = 0; i < links.Length; i++)
         {
             startPos[i] = links[i].transform.localPosition;
+            startRot[i] = links[i].transform.localRotation;
         }
     }
-    public virtual void Set()
+    public virtual void Enter()
     {
-        for (int i = 0; i < startPos.Length; i++)
-        {
-            links[i].transform.localPosition = startPos[i];
-        }
+        Debug.Log("<color=green>Entering!!!</color>");
+        StopAllCoroutines();
         foreach (var link in links)
         {
             if (link == null) continue;
+            link.Rebind();
+            link.Update(0f);
+            /*
             foreach (var p in link.parameters)
             {
                 if (p.type == AnimatorControllerParameterType.Trigger)
                 {
                     link.ResetTrigger(p.name);
                 }
-            }
+            }*/
         }
+        for (int i = 0; i < startPos.Length; i++)
+        {
+            links[i].transform.localPosition = startPos[i];
+            links[i].transform.localRotation = startRot[i];
+        }
+        
+        //ChainLink("tutti", "entry");
         currIn = -1;
     }
-    //public virtual void Exit() { }
+    public virtual void Exit()
+    {
+        Debug.Log("<color=red>Exiting!!!</color>");
+        StopAllCoroutines();
+        currIn = -1;
+    }
     public virtual void Advance()
     {
         if (sequence == null || sequence.Count == 0) return;

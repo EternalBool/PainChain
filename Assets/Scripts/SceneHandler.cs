@@ -39,15 +39,15 @@ public class SceneHandler : MonoBehaviour
 
     void ShowScene(int index)
     {
-        if (index == currentIndex) return;
-        Debug.Log("SHOWWINGNGGGNNGNGNGNG");
-        //if (current != null) current.Exit();
+        //if (index == currentIndex) {Debug.LogWarning("NOT SHOWINGINGSGSING"); return;}
+        if (current != null) current.Exit();
         currentIndex = index;
         for (int i = 0; i < scenes.Count; i++)
         {
             scenes[i].SetActive(i == currentIndex);
         }
         scenes[currentIndex].TryGetComponent(out current);
-        if (current != null) current.Set();
+        if (current != null) current.Enter();
+        Debug.Log($"<color=purple>Loading Scene: {current.name}");
     }
 }
