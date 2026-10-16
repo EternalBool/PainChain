@@ -84,7 +84,7 @@ public abstract class SceneController : MonoBehaviour
     {
         Vector3 start = link.localPosition;
         Quaternion startRot = link.localRotation;
-        for (float e = 0f; e < duration; e+= Time.deltaTime)
+        for (float e = 0f; e < duration; e += Time.deltaTime)
         {
             link.localPosition = Vector3.Lerp(start, destination, Mathf.SmoothStep(0f,1f,e/duration));
             if (rotation != 0f)

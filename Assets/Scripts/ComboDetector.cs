@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 using Unity.Mathematics;
+using UnityEngine.Scripting;
 
 public class ComboDetector : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class ComboDetector : MonoBehaviour
         lastInputTime = Time.time;
         transition = false;
         currScene = combos[currCombo].scene;
-        visualController.AdvanceKey(combos[currCombo].sequence[0]);
+        visualController.ShowKey(combos[currCombo].sequence[0]);
         //Debug.Log($"Combo #{currCombo} - {combos[currCombo].comboName}, Scene {currScene}");
         foreach(var c in combos)
         {
@@ -83,7 +84,7 @@ public class ComboDetector : MonoBehaviour
             }
             else
             {
-                StartCoroutine(MissedCombo());
+                StartCoroutine(InvalidCombo());
             }
         }
 
@@ -95,12 +96,12 @@ public class ComboDetector : MonoBehaviour
             {
                 inputBuffer.Add(pressedKey.Value);
                 sceneHandler.Advance();
-                //lastInputTime = Time.time;
-                
                 int nextIn = inputBuffer.Count;
                 if (nextIn < expected.Count)
                 {
-                    visualController.AdvanceKey(expected[nextIn]);
+                    visualController.AdvanceKey(expected[nextIn], pressedKey.Value);
+                } else if(nextIn >= expected.Count){
+                    visualController.AdvanceKey('X', pressedKey.Value);
                 }
                 if (inputBuffer.Count > maxBufferLength)
                 {
@@ -110,8 +111,7 @@ public class ComboDetector : MonoBehaviour
             else
             {
                 inputBuffer.Add(pressedKey.Value);
-                //InvalidCombo();
-                StartCoroutine(MissedCombo());
+                StartCoroutine(InvalidCombo());
             } 
         }
         CheckCombo();
@@ -147,7 +147,8 @@ public class ComboDetector : MonoBehaviour
         var combo = combos[currCombo];
         if (TailMatch(combo.sequence) && canInput)
         {
-            OnComboSuccess(combo);
+            ValidCombo();
+            Debug.Log($"Combo matched: {combo.comboName} -> loading '{combo.advance}'");
         }
     }
     bool TailMatch(List<char> sequence)
@@ -160,17 +161,6 @@ public class ComboDetector : MonoBehaviour
         }
         return true;
     }
-
-    void OnComboSuccess(ComboEntry combo)
-    {
-        Debug.Log($"Combo matched: {combo.comboName} -> loading '{combo.advance}'");
-        ValidCombo();
-
-        if (!string.IsNullOrEmpty(combo.advance))
-        {
-            //SceneManager.LoadScene(combo.sceneToLoad);
-        }
-    }
     void ValidCombo()
     {
         canInput = false;
@@ -179,36 +169,8 @@ public class ComboDetector : MonoBehaviour
         cstat.color = Color.green;
         tstat.color = Color.green;
         SoundManager.Instance.PlaySound2D("Link");
-        /*
-        yield return new WaitForSeconds(0.5f);
-        cstat.color = Color.white;
-        tstat.color = Color.white;
-        inputBuffer.Clear();
-        currCombo = (currCombo + 1) % combos.Count;
-        inputTimeout = combos[currCombo].duration;
-        lastInputTime = Time.time;
-        visualController.AdvanceKey(combos[currCombo].sequence[0]);
-        canInput = true;
-        Debug.Log($"combo dur: {inputTimeout}");
-        */
     }
-    void InvalidCombo()
-    {
-        if ((Time.time - lastInputTime) < (inputTimeout -  failWait))
-        {
-            
-            //Debug.Log($"Time: {Time.time}, LT: {lastInputTime}, iT: {inputTimeout}, wT: {failWait}");
-            StartCoroutine(MissedCombo());
-        }
-        else
-        {
-            canInput = false;
-            comboClear = false;
-            cstat.color = Color.red;
-            tstat.color = Color.red;
-        }
-    }
-    IEnumerator MissedCombo()
+    IEnumerator InvalidCombo()
     {
         Debug.Log($"Combo Failed: {combos[currCombo].comboName} -> loading '{combos[0].comboName}");
         canInput = false;
@@ -217,29 +179,14 @@ public class ComboDetector : MonoBehaviour
         tstat.color = Color.red;
         SoundManager.Instance.PlaySound2D("Break");
         MusicManager.Instance.BreakMusic("Chain");
-        yield return new WaitForSeconds(3f);
+        StartCoroutine(visualController.DieKey());
+        yield return new WaitForSeconds(failWait);
         Chain("Break");
-        /*
-        cstat.color = Color.white;
-        tstat.color = Color.white;
-        inputBuffer.Clear();
-        currCombo = 0;
-        currScene = combos[currCombo].scene;
-        sceneHandler.ShowScene(currScene);
-        inputTimeout = combos[currCombo].duration;
-        lastInputTime = Time.time;
-        transition = false;
-        visualController.AdvanceKey(combos[currCombo].sequence[0]);
-        canInput = true;
-        MusicManager.Instance.PlayMusic("Chain", 0f);
-        Debug.Log($"combo dur: {inputTimeout}");
-        */
     }
 
     void Chain(string act)
     {
         lastScene = currScene;
-        //Debug.Log($"Last Scene: {lastScene}");
         if (act == "Link")
         {
             currScene = combos[currCombo].advance;
@@ -251,7 +198,6 @@ public class ComboDetector : MonoBehaviour
             currScene = combos[0].scene;
             MusicManager.Instance.PlayMusic("Chain", 0f);
         }
-        //Debug.Log($"Combo #{currCombo} - {combos[currCombo].comboName}, Scene {currScene}");
         cstat.color = Color.white;
         tstat.color = Color.white;
         inputBuffer.Clear();
@@ -261,7 +207,7 @@ public class ComboDetector : MonoBehaviour
         transition = false;
         comboClear = false;
         comboFail = false;
-        visualController.AdvanceKey(combos[currCombo].sequence[0]);
+        visualController.ShowKey(combos[currCombo].sequence[0]);
         canInput = true;
         //Debug.Log($"combo dur: {inputTimeout}");
     }
