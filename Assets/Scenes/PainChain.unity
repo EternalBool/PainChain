@@ -1469,7 +1469,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VisualController
   buttonTemp: {fileID: 4806422276448376440, guid: d487c6f6da77b2a489c8b5238bee23a2, type: 3}
   spawnPoint: {fileID: 1140404026}
-  flyOffDur: 0.1
+  flyOffDur: 2
+  dist: 3000
+  spinSpeed: 10
 --- !u!1 &1355390159
 GameObject:
   m_ObjectHideFlags: 0
