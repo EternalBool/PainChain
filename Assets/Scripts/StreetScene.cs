@@ -3,6 +3,8 @@ using UnityEngine;
 public class StreetScene : SceneController
 {
     Animator whip => links[0];
+    Animator table => links[1];
+    Animator streetlight => links[2];
     protected override void ChainLink(string ent, string act)
     {
         switch (ent)
