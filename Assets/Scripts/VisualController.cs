@@ -25,6 +25,7 @@ public class VisualController : MonoBehaviour
             {'D', (new Vector3(0,-dist, 0f), -360f)},
             {'L', (new Vector3(-dist,0f, 0f), -360f)},
             {'R', (new Vector3(dist,0f, 0f), 360f)},
+            {'S', (new Vector3(dist,0f,0f), 360f)}
         };
     }
     public void AdvanceKey(char nextDir, char? currDir = null)

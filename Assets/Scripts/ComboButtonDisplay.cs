@@ -8,6 +8,7 @@ public class ComboButtonDisplay : MonoBehaviour
     [SerializeField] private Sprite down;
     [SerializeField] private Sprite left;
     [SerializeField] private Sprite right;
+    [SerializeField] private Sprite space;
     [SerializeField] private Sprite disabled;
 
     public void setDir(char direction)
@@ -18,6 +19,7 @@ public class ComboButtonDisplay : MonoBehaviour
             case 'D': arrows.sprite = down; break;
             case 'L': arrows.sprite = left; break;
             case 'R': arrows.sprite = right; break;
+            case 'S': arrows.sprite = space; break;
         }
     }
     public void pressed()

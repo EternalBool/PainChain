@@ -139,6 +139,7 @@ public class ComboDetector : MonoBehaviour
         if (kb.downArrowKey.wasReleasedThisFrame || kb.sKey.wasPressedThisFrame) return 'D';
         if (kb.leftArrowKey.wasReleasedThisFrame || kb.aKey.wasPressedThisFrame) return 'L';
         if (kb.rightArrowKey.wasReleasedThisFrame || kb.dKey.wasPressedThisFrame) return 'R';
+        if (kb.spaceKey.wasPressedThisFrame) return 'S';
         return null;
     }
     void CheckCombo()
