@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &395716284
 Transform:
   m_ObjectHideFlags: 0
@@ -3832,7 +3832,7 @@ MonoBehaviour:
     advance: STREET
     duration: 1
   - comboName: STREETLIGHTCOMBO
-    sequence: 52005200
+    sequence: 53005200
     scene: STREET
     advance: GRASS
     duration: 4

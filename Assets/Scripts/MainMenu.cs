@@ -1,8 +1,4 @@
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
-using UnityEditor.Timeline;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
